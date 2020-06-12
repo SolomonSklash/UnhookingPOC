@@ -5,7 +5,7 @@
 #include <fstream>
 using namespace std;
 
-void printBytes(char bytes[], string filename, SIZE_T size)
+void saveBytes(char bytes[], string filename, SIZE_T size)
 {
 	ofstream myfile;
 	myfile.open(filename);
@@ -207,7 +207,7 @@ int main()
 			printf("\t\t[*] Saving the hooked ntdll bytes to .\\hooked.txt\n");
 			char* hookedBytes{ new char[hookedVirtualAddressSize] {} };
 			memcpy_s(hookedBytes, hookedVirtualAddressSize, hookedVirtualAddressStart, hookedVirtualAddressSize);
-			printBytes(hookedBytes, "hooked.txt", hookedVirtualAddressSize);
+			saveBytes(hookedBytes, "hooked.txt", hookedVirtualAddressSize);
 
 			printf("\t\t[*] Changing memory protection status of the hooked .text section to RWX\n");
 
@@ -236,7 +236,7 @@ int main()
 			printf("\t\t[*] Saving the clean ntdll bytes to .\\clean.txt\n");
 			char* cleanBytes{ new char[hookedVirtualAddressSize] {} };
 			memcpy_s(cleanBytes, hookedVirtualAddressSize, cleanVirtualAddressStart, hookedVirtualAddressSize);
-			printBytes(cleanBytes, "clean.txt", hookedVirtualAddressSize);
+			saveBytes(cleanBytes, "clean.txt", hookedVirtualAddressSize);
 
 			delete[] hookedBytes;
 			delete[] cleanBytes;
